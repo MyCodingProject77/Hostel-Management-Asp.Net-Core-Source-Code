@@ -1,0 +1,71 @@
+
+
+
+     Packages to Install
+          Microsoft.Entity.Framework Core
+          Microsoft.Entity.Framework Core.SqlServer
+          Microsoft Entity Framework Core.Tools
+
+
+
+    Database Connection Code
+
+     "ConnectionStrings": {
+  "DefaultConnection": "Server=DESKTOP-HEEKBHE\\SQLEXPRESS;Database=HostelDB;Trusted_Connection=True;TrustServerCertificate=True"
+},
+
+
+
+     Student Class
+
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Phone { get; set; }
+    public string Email { get; set; }
+    public string Address { get; set; }
+
+
+   StudentsDbContext
+
+
+  public class StudentsDbContext: DbContext
+{
+    public StudentsDbContext(DbContextOptions<StudentsDbContext> options)
+        : base(options)
+    {
+
+    }
+
+    public DbSet<Students> Student { get; set; }
+}
+
+
+
+
+  program.cs 
+
+    builder.Services.AddDbContext<StudentsDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+
+
+
+
+  Migrations and Update Database
+
+  add-migration initial
+
+  update-database
+
+
+
+
+    add-migration initial -Context HostelManagement.Room.RoomsDbContext
+
+        update-database -Context HostelManagement.Room.RoomsDbContext
+ 
+
+
+    
